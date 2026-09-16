@@ -1,0 +1,26 @@
+---
+title: "Example workflow using `litreview`"
+format: html
+---
+
+```{r}
+#| echo: false
+lapply(list.files("R", full.names = TRUE), source)
+```
+
+First, we start off using the `call_oa_api` function to send our DOI to the unpaywall API. It's important to provide your email address, otherwise you run the risk of being blacklisted.
+
+```{r}
+oa_api_results <- call_oa_api("10.5694/mja2.52593","your@email.com")
+```
+
+Once we've got a response from the API, we then check for candidate URLs that might point us to a `.pdf` file for the DOI.
+
+```{r}
+pdf_locations <- get_possible_locations(oa_api_results, "pdf")
+html_locations <- get_possible_locations(oa_api_results, "html")
+```
+
+With these locations, we can then try to download the file.
+
+

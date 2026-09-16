@@ -1,0 +1,10 @@
+Package: litreview
+Title: Get Literature, Make Bibliographies
+Version: 0.0.0.9000
+Authors@R: 
+    person("Benjamin", "Harrap", , "benjamin.harrap@anu.edu.au", role = c("aut", "cre"))
+Description: litreview contains a suite of functions to make the process of gathering academic literature, compiling bibliographies, and note-taking easier. Based on Digital Object Identifiers (DOIs), litreview can check if an article is open-access and, if possible, download a PDF copy. It also assists in compiling bibliographies and can open PDFs in RStudio's Viewer window, allowing you to have markdown documents and the literature side-by-side.
+License: `use_mit_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
