@@ -11,16 +11,30 @@ lapply(list.files("R", full.names = TRUE), source)
 First, we start off using the `call_oa_api` function to send our DOI to the unpaywall API. It's important to provide your email address, otherwise you run the risk of being blacklisted.
 
 ```{r}
-oa_api_results <- call_oa_api("10.5694/mja2.52593","your@email.com")
+oa_api_results <- call_oa_api("10.1186/s13063-023-07338-5","your@email.com")
 ```
 
-Once we've got a response from the API, we then check for candidate URLs that might point us to a `.pdf` file for the DOI.
+Once we've got a response from the API, we then check for candidate URLs that might point us to a pdf file for the DOI.
 
 ```{r}
 pdf_locations <- get_possible_locations(oa_api_results, "pdf")
-html_locations <- get_possible_locations(oa_api_results, "html")
+pdf_locations
 ```
 
-With these locations, we can then try to download the file.
+With these locations, we can try to download the pdf directly
 
+```{r}
+try_pdf_location(pdf_locations[[1]])
+try_pdf_location(pdf_locations[[2]])
+try_pdf_location(pdf_locations[[3]])
+```
+
+No luck with the first two, but the third one succeeds.
+
+If none of the pdf locations worked, we can also try our luck using webpages and scraping the HTML
+
+```{r}
+html_locations <- get_possible_locations(oa_api_results, "html")
+html_locations
+```
 
